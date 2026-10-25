@@ -13,6 +13,10 @@ The contact form posts to `POST /api/registrations`. Local submissions are saved
 
 The JSON file store is for local development. Before collecting real alumni information in production, connect an access-controlled database and configure secure deployment, backups, privacy notice, and retention rules.
 
+## GitHub Pages reference site
+
+The `main` branch deploys the React frontend to [https://daniel15maria.github.io/santhome](https://daniel15maria.github.io/santhome) through GitHub Actions. GitHub Pages serves static files, so the local Express registration API is not deployed there; event registration requires a separately hosted API.
+
 ## Pages
 
 - `src/pages/Overview`
