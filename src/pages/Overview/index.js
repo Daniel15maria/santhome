@@ -38,7 +38,9 @@ export default function OverviewPage({ go }) {
         </div>
       </section>
 
-      <PrincipalWelcome />
+      <section className="principal-stage" aria-label="A welcome from the school">
+        <PrincipalWelcome />
+      </section>
 
       <section className="note-section motion-reveal">
         <div className="note-mark">“</div>
