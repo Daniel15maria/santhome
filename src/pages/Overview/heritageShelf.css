@@ -4,7 +4,7 @@
 .heritage-shelf-layout{max-width:1440px;margin:auto}
 .heritage-boxes{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
 .heritage-box{position:relative;min-width:0;min-height:76px;padding:0 22px 0 26px;overflow:hidden;border:1px solid #dce3ed;border-radius:9px;background:#fff;box-shadow:0 6px 20px rgba(23,45,85,.04);transition:box-shadow .3s ease,background .3s ease}
-.heritage-box::before{position:absolute;inset:0 0 0 auto;width:22%;background-image:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.64) 36%,rgba(255,255,255,.12) 100%),var(--heritage-image);background-position:center 42%;background-size:cover;content:'';opacity:.25;transition:opacity .3s ease}
+.heritage-box::before{position:absolute;inset:0 0 0 auto;width:27%;background-image:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.5) 28%,rgba(255,255,255,.08) 72%,rgba(255,255,255,0) 100%),var(--heritage-image);background-position:center 42%;background-size:cover;content:'';opacity:.78;transition:opacity .3s ease}
 .heritage-box:hover{box-shadow:0 12px 28px rgba(23,45,85,.09)}
 .heritage-box.is-expanded{padding-bottom:20px;background:#fff;box-shadow:0 14px 34px rgba(23,45,85,.1)}
 .heritage-box-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:74px}
