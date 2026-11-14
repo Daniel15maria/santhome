@@ -13,11 +13,11 @@ export default function ContactPage() {
       name: values.get('name'),
       batchYear: values.get('batchYear'),
       email: values.get('email'),
+      phone: values.get('phone'),
       interest: values.get('interest'),
-      newsletter: values.get('newsletter') === 'on',
     };
     try {
-      const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+      const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'service_73fq63c';
       const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
       const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
       if (!serviceId || !templateId || !publicKey) {
@@ -36,8 +36,8 @@ export default function ContactPage() {
             name: payload.name,
             batch_year: payload.batchYear,
             email: payload.email,
+            phone: payload.phone,
             interest: payload.interest,
-            newsletter: payload.newsletter ? 'Yes' : 'No',
             submitted_at: new Date().toLocaleString(),
           },
         }),
@@ -67,10 +67,10 @@ export default function ContactPage() {
           {status === 'success' ? <div className="form-success" role="status"><span>✳</span><h2 className="type-section">You’re home.</h2><p>Thank you for reconnecting. We’ll be in touch soon.</p></div> : <>
             <label>Your name<input name="name" required autoComplete="name" placeholder="As your classmates know you"/></label>
             <div className="form-row"><label>Batch year<input name="batchYear" required inputMode="numeric" pattern="(?:19|20)\d{2}" placeholder="e.g. 1992"/></label><label>Email address<input name="email" required type="email" autoComplete="email" placeholder="you@example.com"/></label></div>
+            <label>Phone number<input name="phone" required type="tel" autoComplete="tel" inputMode="tel" pattern="[0-9+() .-]{8,20}" title="Enter a phone number with 8 to 20 digits, spaces, or + ( ) - characters" placeholder="e.g. +91 98765 43210"/></label>
             <label>What would you like to do?<select name="interest" defaultValue="" required><option value="" disabled>Select a way to reconnect</option><option>Find my batchmates</option><option>Attend an event</option><option>Mentor current students</option><option>Share a school memory</option></select></label>
-            <label className="check-label"><input name="newsletter" type="checkbox"/> I’d like to hear about reunions and alumni news.</label>
             {error && <p className="form-error" role="alert">{error}</p>}
-            <button className="button-dark submit-button" disabled={status === 'submitting'}>{status === 'submitting' ? 'Saving…' : <>Join the family <span>↗</span></>}</button>
+            <button className="button-dark submit-button" disabled={status === 'submitting'}>{status === 'submitting' ? 'Sending…' : <>Join the family <span>↗</span></>}</button>
             <small>Your details help us bring the Santhome family together.</small>
           </>}
         </form>

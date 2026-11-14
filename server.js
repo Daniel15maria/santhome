@@ -57,10 +57,12 @@ const server = http.createServer(async (request, response) => {
     const name = typeof body.name === 'string' ? body.name.trim().slice(0, 120) : '';
     const batchYear = Number(body.batchYear);
     const email = typeof body.email === 'string' ? body.email.trim().toLowerCase().slice(0, 254) : '';
+    const phone = typeof body.phone === 'string' ? body.phone.trim().slice(0, 32) : '';
     const allowedInterests = ['Find my batchmates', 'Attend an event', 'Mentor current students', 'Share a school memory'];
     if (name.length < 2) return send(response, 400, { error: 'Please enter your name.' });
     if (!Number.isInteger(batchYear) || batchYear < 1950 || batchYear > new Date().getFullYear()) return send(response, 400, { error: 'Please enter a valid school batch year.' });
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return send(response, 400, { error: 'Please enter a valid email address.' });
+    if (!/^[0-9+().\s-]{8,20}$/.test(phone) || (phone.match(/\d/g) || []).length < 7) return send(response, 400, { error: 'Please enter a valid phone number.' });
     if (!allowedInterests.includes(body.interest)) return send(response, 400, { error: 'Please choose how you would like to reconnect.' });
 
     const registrations = await readRegistrations();
@@ -69,8 +71,8 @@ const server = http.createServer(async (request, response) => {
       name,
       batchYear,
       email,
+      phone,
       interest: body.interest,
-      newsletter: body.newsletter === true,
       createdAt: new Date().toISOString(),
     };
     registrations.push(registration);

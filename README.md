@@ -19,7 +19,7 @@ The `main` branch deploys the React frontend to [https://daniel15maria.github.io
 
 ### Configure alumni registration email
 
-Create an EmailJS email service and template. Set the template's **To Email** to `{{to_email}}`; the form supplies the destination address. Use these template variables in the message body: `{{name}}`, `{{batch_year}}`, `{{email}}`, `{{interest}}`, `{{newsletter}}`, and `{{submitted_at}}`. Set **Reply To** to `{{email}}` if you want to reply directly to the alumnus.
+Create an EmailJS email service and template. Set the template's **To Email** to `{{to_email}}`; the form supplies the destination address. Use these template variables in the message body: `{{name}}`, `{{batch_year}}`, `{{email}}`, `{{phone}}`, `{{interest}}`, and `{{submitted_at}}`. Set **Reply To** to `{{email}}` if you want to reply directly to the alumnus.
 
 For local development, copy `.env.example` to `.env.local` and fill in the EmailJS service ID, template ID, and public key. For GitHub Pages, add repository Actions variables named `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, and `EMAILJS_PUBLIC_KEY` under **Settings → Secrets and variables → Actions → Variables**. The public key is intended for browser use; never place a private key in the frontend.
 
