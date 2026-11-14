@@ -15,7 +15,13 @@ The JSON file store is for local development. Before collecting real alumni info
 
 ## GitHub Pages reference site
 
-The `main` branch deploys the React frontend to [https://daniel15maria.github.io/santhome](https://daniel15maria.github.io/santhome) through GitHub Actions. GitHub Pages serves static files, so the local Express registration API is not deployed there; event registration requires a separately hosted API.
+The `main` branch deploys the React frontend to [https://daniel15maria.github.io/santhome](https://daniel15maria.github.io/santhome) through GitHub Actions. GitHub Pages serves static files, so the local registration API is not deployed there. The alumni form uses EmailJS to email new registrations to `shssaa.1821@gmail.com`.
+
+### Configure alumni registration email
+
+Create an EmailJS email service and template. Set the template's **To Email** to `{{to_email}}`; the form supplies the destination address. Use these template variables in the message body: `{{name}}`, `{{batch_year}}`, `{{email}}`, `{{interest}}`, `{{newsletter}}`, and `{{submitted_at}}`. Set **Reply To** to `{{email}}` if you want to reply directly to the alumnus.
+
+For local development, copy `.env.example` to `.env.local` and fill in the EmailJS service ID, template ID, and public key. For GitHub Pages, add repository Actions variables named `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, and `EMAILJS_PUBLIC_KEY` under **Settings → Secrets and variables → Actions → Variables**. The public key is intended for browser use; never place a private key in the frontend.
 
 ## Pages
 

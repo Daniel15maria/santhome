@@ -17,13 +17,35 @@ export default function ContactPage() {
       newsletter: values.get('newsletter') === 'on',
     };
     try {
-      const response = await fetch('/api/registrations', {
+      const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+      const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+      const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('Email delivery is not configured yet. Please contact us directly at shssaa.1821@gmail.com.');
+      }
+
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: {
+            to_email: 'shssaa.1821@gmail.com',
+            name: payload.name,
+            batch_year: payload.batchYear,
+            email: payload.email,
+            interest: payload.interest,
+            newsletter: payload.newsletter ? 'Yes' : 'No',
+            submitted_at: new Date().toLocaleString(),
+          },
+        }),
       });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || 'Registration could not be saved.');
+      if (!response.ok) {
+        const reason = await response.text();
+        throw new Error(reason || 'Email delivery failed. Please try again.');
+      }
       setStatus('success');
     } catch (requestError) {
       setStatus('error');
@@ -36,7 +58,7 @@ export default function ContactPage() {
       <div className="inner-hero motion-reveal"><p className="eyebrow">04 / YOUR PLACE IS HERE</p><h1 className="type-display">Let’s find<br/><em>each other.</em></h1><p>Whether you left last year or fifty years ago, there’s a place for you in the Santhome family.</p></div>
       <div className="contact-grid motion-reveal">
         <div className="contact-info"><div className="section-kicker">THE FIRST STEP HOME</div><h2 className="type-section">Two minutes.<br/><em>A lifetime of connection.</em></h2><p>Register your details and we’ll help you reconnect with your batch, hear about upcoming events and find ways to give back.</p>
-          <div className="contact-detail"><span>WRITE TO US</span><a href="mailto:Karthik.b2@gmail.com">Karthik.b2@gmail.com ↗</a></div>
+          <div className="contact-detail"><span>WRITE TO US</span><a href="mailto:shssaa.1821@gmail.com">shssaa.1821@gmail.com ↗</a></div>
           <div className="contact-detail"><span>GIVE US A CALL</span><a href="tel:+919884485511">+91 98844 85511 ↗</a></div>
           <div className="contact-detail"><span>COME SAY HELLO</span><p>143 Santhome High Road<br/>Mylapore, Chennai — 600004</p></div>
         </div>

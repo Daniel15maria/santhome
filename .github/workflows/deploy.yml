@@ -32,6 +32,10 @@ jobs:
         with:
           enablement: true
       - name: Build site
+        env:
+          REACT_APP_EMAILJS_SERVICE_ID: ${{ vars.EMAILJS_SERVICE_ID }}
+          REACT_APP_EMAILJS_TEMPLATE_ID: ${{ vars.EMAILJS_TEMPLATE_ID }}
+          REACT_APP_EMAILJS_PUBLIC_KEY: ${{ vars.EMAILJS_PUBLIC_KEY }}
         run: npm run build
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v4
