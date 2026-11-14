@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face{font-family:'Plus Jakarta Sans';src:url('./assets/fonts/PlusJakartaSans-Variable.ttf') format('truetype');font-style:normal;font-weight:200 800;font-display:swap}
+@font-face{font-family:'Plus Jakarta Sans';src:url('./assets/fonts/PlusJakartaSans-VariableFont_wght.ttf') format('truetype');font-style:normal;font-weight:200 800;font-display:swap}
 :root{--ink:#172d55;--paper:#f6f8fc;--orange:#bc7b27;--line:#dce3ee;--muted:#64748b;--serif:'Plus Jakarta Sans',Arial,sans-serif;--sans:'Plus Jakarta Sans',Arial,sans-serif;--mono:'DM Mono',monospace}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f8fc;color:#172d55;font-family:'Plus Jakarta Sans',Arial,sans-serif;font-weight:500;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}button{font-family:inherit}img{max-width:100%}::selection{background:#24488f;color:#fff}
 

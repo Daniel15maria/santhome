@@ -48,3 +48,10 @@
 @media(prefers-reduced-motion:reduce){.page-transition>main{animation:none}}
 @media(max-width:900px){.principal-welcome{margin-left:7%;margin-right:7%;grid-template-columns:.9fr 1.1fr}.principal-copy{padding:34px}}
 @media(max-width:650px){.principal-welcome{margin-left:7%;margin-right:7%;grid-template-columns:1fr}.principal-photo-wrap{min-height:330px}.principal-copy{padding:30px 24px}}
+
+/* Stronger, clearer type hierarchy using the Skillang Plus Jakarta Sans variable font. */
+.hero h1,.inner-hero h1{font-weight:800}
+.hero h1 em,.inner-hero h1 em,.story-grid h2 em,.purpose-heading h2 em,.strip-heading h2 em,.cta h2 em,.gallery-invite h2 em,.contact-info h2 em{font-weight:750}
+.story-text p,.principal-copy p,.contact-info p{font-weight:500}
+.contact-info h2,.event-feature-caption h2,.event-list h3,.purpose-cards h3{font-weight:750}
+.purpose-cards p,.event-list article p,.register-form>label,.form-row label{font-weight:500}

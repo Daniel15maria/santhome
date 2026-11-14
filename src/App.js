@@ -34,7 +34,7 @@ function App() {
     <div key={page} className="page-transition">
       {page === 'Our story' && <OverviewPage go={go} photos={photos} />}
       {page === 'Events' && <EventsPage />}
-      {page === 'Gallery' && <GalleryPage go={go} photos={photos} />}
+      {page === 'Gallery' && <GalleryPage go={go} />}
       {page === 'Contact' && <ContactPage />}
     </div>
 
