@@ -18,8 +18,8 @@ export default function ContactPage() {
     };
     try {
       const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'service_73fq63c';
-      const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-      const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+      const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'template_q83fs0d';
+      const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'MmntosZE5j1lwqQyd';
       if (!serviceId || !templateId || !publicKey) {
         throw new Error('Email delivery is not configured yet. Please contact us directly at shssaa.1821@gmail.com.');
       }
