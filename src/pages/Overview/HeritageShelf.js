@@ -34,7 +34,10 @@ export default function HeritageShelf() {
           {stories.map((story, index) => {
             const isExpanded = expanded === index;
             return (
-              <article className={`heritage-box${isExpanded ? ' is-expanded' : ''}`} key={story.number} style={{ '--heritage-image': `url("${story.image}")` }}>
+              <article className={`heritage-box${isExpanded ? ' is-expanded' : ''}`} key={story.number}>
+                <div className="heritage-box-art" aria-hidden="true">
+                  <img src={story.image} alt="" loading="lazy" />
+                </div>
                 <div className="heritage-box-top">
                   <div className="heritage-box-title"><span>{story.number} /</span><h2>{story.title}</h2></div>
                   <button className="heritage-more" type="button" aria-expanded={isExpanded} aria-label={`${isExpanded ? 'Close' : 'Read more:'} ${story.title}`} onClick={() => setExpanded(isExpanded ? null : index)}>
