@@ -29,26 +29,27 @@ export default function HeritageShelf() {
   return (
     <section className="heritage-shelf" id="school-story" aria-label="Our story">
       <div className="heritage-shelf-heading"><span className="section-kicker">OUR STORY, IN THREE CHAPTERS</span><p>Every Santhomite has a place in it.</p></div>
-      <div className="heritage-boxes">
-        {stories.map((story, index) => {
-          const isExpanded = expanded === index;
-          return (
-            <article className={`heritage-box${isExpanded ? ' is-expanded' : ''}`} key={story.number} style={{ '--heritage-image': `url("${story.image}")` }}>
-              <div className="heritage-box-top">
-                <div className="heritage-box-title"><span>{story.number} /</span><h2>{story.title}</h2></div>
-                <button className="heritage-more" type="button" aria-expanded={isExpanded} aria-label={`${isExpanded ? 'Close' : 'Read more:'} ${story.title}`} onClick={() => setExpanded(isExpanded ? null : index)}>
-                  <span className={`heritage-plus${isExpanded ? ' is-open' : ''}`} aria-hidden="true">+</span>
-                </button>
-              </div>
-              <p className="heritage-intro">{story.intro}</p>
-              <div className="heritage-box-content" hidden={!isExpanded}>{story.detail}</div>
-              <div className="heritage-box-photos" aria-label="Alumni photos scrolling vertically">
-                <div className="heritage-box-photo-track">{[...photos, ...photos].map((photo, photoIndex) => <img key={`${story.number}-${photo.id}-${photoIndex}`} src={photo.src} alt={photoIndex < photos.length ? photo.alt : ''} aria-hidden={photoIndex >= photos.length} loading="lazy" />)}</div>
-              </div>
-              <span className="heritage-box-caption">SANTHOME · {story.number}</span>
-            </article>
-          );
-        })}
+      <div className="heritage-shelf-layout">
+        <div className="heritage-boxes">
+          {stories.map((story, index) => {
+            const isExpanded = expanded === index;
+            return (
+              <article className={`heritage-box${isExpanded ? ' is-expanded' : ''}`} key={story.number} style={{ '--heritage-image': `url("${story.image}")` }}>
+                <div className="heritage-box-top">
+                  <div className="heritage-box-title"><span>{story.number} /</span><h2>{story.title}</h2></div>
+                  <button className="heritage-more" type="button" aria-expanded={isExpanded} aria-label={`${isExpanded ? 'Close' : 'Read more:'} ${story.title}`} onClick={() => setExpanded(isExpanded ? null : index)}>
+                    <span className={`heritage-plus${isExpanded ? ' is-open' : ''}`} aria-hidden="true">+</span>
+                  </button>
+                </div>
+                <p className="heritage-intro" hidden={!isExpanded}>{story.intro}</p>
+                <div className="heritage-box-content" hidden={!isExpanded}>{story.detail}</div>
+              </article>
+            );
+          })}
+        </div>
+        <aside className="heritage-memory-rail" aria-label="Santhome gallery memories scrolling horizontally">
+          <div className="heritage-memory-track">{[...photos, ...photos].map((photo, index) => <img key={`${photo.id}-${index}`} src={photo.src} alt={index < photos.length ? photo.alt : ''} aria-hidden={index >= photos.length} loading="lazy" />)}</div>
+        </aside>
       </div>
     </section>
   );
