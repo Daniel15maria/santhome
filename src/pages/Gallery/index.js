@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import './gallery.css';
-import { galleryFolders, galleryMemories, getFolderCover } from './galleryData';
+import { galleryFolders, galleryMemories, galleryVideos, getFolderCover } from './galleryData';
 
 export default function GalleryPage({ go }) {
   const [activeFolder, setActiveFolder] = useState('all');
@@ -38,7 +38,7 @@ export default function GalleryPage({ go }) {
 
   const openFolder = (folderId) => {
     setActiveFolder(folderId);
-    window.setTimeout(() => document.getElementById('memory-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    window.setTimeout(() => document.getElementById(folderId === 'videos' ? 'video-grid' : 'memory-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
   };
 
   const changePhoto = (direction) => {
@@ -48,19 +48,19 @@ export default function GalleryPage({ go }) {
 
   return (
     <main className="inner-page gallery-page">
-      <section className="inner-hero gallery-hero motion-reveal">
+      <section className="inner-hero gallery-hero">
         <div>
           <p className="eyebrow">03 / SANTHOME, THROUGH OUR EYES</p>
           <h1 className="type-display">A living album<br/>of <em>Santhome.</em></h1>
           <p>Every face holds a story. Explore the reunions, teachers, celebrations, and school days that still bring us back.</p>
         </div>
-        <div className="gallery-count" aria-label={`${galleryMemories.length} photographs in ${galleryFolders.length} albums`}>
+        <div className="gallery-count" aria-label={`${galleryMemories.length} photographs and ${galleryVideos.length} videos in the gallery`}>
           <strong>{String(galleryMemories.length).padStart(2, '0')}</strong>
-          <span>PHOTOGRAPHS<br/>4 ALBUMS</span>
+          <span>PHOTOS<br/>{String(galleryVideos.length).padStart(2, '0')} VIDEOS</span>
         </div>
       </section>
 
-      <section className="gallery-albums motion-reveal" aria-labelledby="album-heading">
+      <section className="gallery-albums" aria-labelledby="album-heading">
         <div className="gallery-section-heading">
           <div>
             <p className="section-kicker">OPEN A FOLDER</p>
@@ -93,10 +93,49 @@ export default function GalleryPage({ go }) {
               </button>
             );
           })}
+          <button className="gallery-folder gallery-folder-videos" onClick={() => openFolder('videos')} style={{ '--folder-delay': `${galleryFolders.length * 90}ms` }} aria-label={`Open Our videos, ${galleryVideos.length} clips`}>
+            <span className="folder-image-wrap">
+              <img src={galleryVideos[0]?.poster} alt="" loading="lazy" />
+              <span className="folder-image-wash" />
+              <span className="folder-count">{String(galleryVideos.length).padStart(2, '0')} VIDEOS</span>
+              <span className="folder-play" aria-hidden="true">▶</span>
+            </span>
+            <span className="folder-caption">
+              <span className="folder-eyebrow">SANTHOME, ON FILM</span>
+              <span className="folder-title">Our videos</span>
+              <span className="folder-description">Watch moments from the alumni archive, gathered in one place.</span>
+            </span>
+          </button>
         </div>
       </section>
 
-      <section className="gallery-collection motion-reveal" id="memory-grid" aria-labelledby="memories-heading">
+      {activeFolder === 'videos' ? (
+        <section className="gallery-collection gallery-video-collection" id="video-grid" aria-labelledby="videos-heading">
+          <div className="gallery-collection-heading">
+            <div>
+              <p className="section-kicker">THE VIDEO ARCHIVE</p>
+              <h2 id="videos-heading">Our videos.</h2>
+            </div>
+            <span className="gallery-results">{String(galleryVideos.length).padStart(2, '0')} CLIPS</span>
+          </div>
+          <div className="gallery-filter" role="group" aria-label="Filter gallery folders">
+            <button className="active" onClick={() => setActiveFolder('videos')}>Our videos <span>{galleryVideos.length}</span></button>
+            <button onClick={() => setActiveFolder('all')}>All photographs <span>{galleryMemories.length}</span></button>
+          </div>
+          <div className="gallery-video-grid">
+            {galleryVideos.map((video) => (
+              <article className="gallery-video-card" key={video.id}>
+                <video controls playsInline preload="none" poster={video.poster} aria-label={video.title}>
+                  <source src={video.src} type="video/mp4" />
+                  Your browser does not support MP4 video playback.
+                </video>
+                <div className="gallery-video-caption"><span>{video.title}</span><span>ALUMNI ARCHIVE · {String(video.id).padStart(2, '0')}</span></div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : (
+      <section className="gallery-collection" id="memory-grid" aria-labelledby="memories-heading">
         <div className="gallery-collection-heading">
           <div>
             <p className="section-kicker">THE PHOTO ARCHIVE</p>
@@ -111,6 +150,7 @@ export default function GalleryPage({ go }) {
               {folder.title}<span>{folder.memories.length}</span>
             </button>
           ))}
+          <button className={activeFolder === 'videos' ? 'active' : ''} onClick={() => openFolder('videos')}>Our videos<span>{galleryVideos.length}</span></button>
         </div>
         <div className="gallery-grid gallery-memory-grid">
           {visibleMemories.map((memory, index) => (
@@ -127,8 +167,9 @@ export default function GalleryPage({ go }) {
           ))}
         </div>
       </section>
+      )}
 
-      <section className="gallery-invite motion-reveal">
+      <section className="gallery-invite">
         <p className="eyebrow">YOUR MEMORY BELONGS HERE</p>
         <h2 className="type-section">Have a photo<br/>to <em>share?</em></h2>
         <button className="button-dark btn-primary" onClick={() => go('Contact')}>Share a memory <span>↗</span></button>

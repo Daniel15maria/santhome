@@ -56,3 +56,14 @@ export const galleryMemories = sortedFiles.map((file, index) => {
 });
 
 export const getFolderCover = (folder) => galleryMemories.find((memory) => memory.id === folder.coverNumber);
+
+const videoFiles = require.context('../../assets/videos/our-videos', false, /\.mp4$/);
+const sortedVideoFiles = videoFiles.keys().sort((left, right) => left.localeCompare(right));
+const videoPosterNumbers = [65, 66, 67, 68, 69];
+
+export const galleryVideos = sortedVideoFiles.map((file, index) => ({
+  id: index + 1,
+  title: `Santhome memory ${String(index + 1).padStart(2, '0')}`,
+  src: videoFiles(file),
+  poster: galleryMemories.find((memory) => memory.id === videoPosterNumbers[index])?.src,
+}));

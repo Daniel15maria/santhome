@@ -10,7 +10,8 @@ module.exports = {
         gold: '#bc7b27',
       },
       fontFamily: {
-        jakarta: ['Plus Jakarta Sans', 'Arial', 'sans-serif'],
+        jakarta: ['Manrope', 'Arial', 'sans-serif'],
+        dm: ['DM Sans', 'Arial', 'sans-serif'],
       },
       boxShadow: {
         card: '0 22px 55px rgba(23,45,85,.12)',

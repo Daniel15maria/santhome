@@ -161,6 +161,30 @@
   transition: background .25s ease, color .25s ease, transform .25s ease;
 }
 
+.folder-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 45px;
+  height: 45px;
+  place-items: center;
+  padding-left: 3px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255,255,255,.78);
+  border-radius: 50%;
+  background: rgba(16, 36, 73, .38);
+  color: #fff;
+  font-size: 13px;
+  transition: background .25s ease, transform .25s ease;
+}
+
+.gallery-folder-videos:hover .folder-play {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: #fff;
+  color: #172d55;
+}
+
 .gallery-folder:hover .folder-open {
   transform: rotate(45deg);
   background: white;
@@ -204,6 +228,55 @@
   padding-top: 78px;
   background: #edf1f7;
   scroll-margin-top: 30px;
+}
+
+.gallery-video-collection {
+  min-height: 0;
+  padding-bottom: 76px;
+}
+
+.gallery-video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 25px 20px;
+}
+
+.gallery-video-card {
+  overflow: hidden;
+  border: 1px solid #d7dfeb;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(23,45,85,.07);
+  animation: memory-arrive .55s cubic-bezier(.2,.75,.25,1) both;
+}
+
+.gallery-video-card video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #101b30;
+  object-fit: contain;
+}
+
+.gallery-video-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+}
+
+.gallery-video-caption span:first-child {
+  color: #172d55;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.gallery-video-caption span:last-child {
+  color: #64748b;
+  font: 9px var(--mono);
+  letter-spacing: .06em;
+  white-space: nowrap;
 }
 
 .gallery-collection-heading {
@@ -506,6 +579,8 @@
   .folder-title { font-size: 16px; }
   .folder-description { font-size: 9px; }
   .gallery-page .gallery-memory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 19px 11px; }
+  .gallery-video-grid { grid-template-columns: 1fr; gap: 18px; }
+  .gallery-video-caption { align-items: start; flex-direction: column; gap: 7px; padding: 14px; }
   .gallery-memory-image img { height: 170px; }
   .gallery-memory-0 .gallery-memory-image img,
   .gallery-memory-4 .gallery-memory-image img { height: 205px; }

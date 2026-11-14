@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face{font-family:'Plus Jakarta Sans';src:url('./assets/fonts/PlusJakartaSans-VariableFont_wght.ttf') format('truetype');font-style:normal;font-weight:200 800;font-display:swap}
-:root{--ink:#172d55;--paper:#f6f8fc;--orange:#bc7b27;--line:#dce3ee;--muted:#64748b;--serif:'Plus Jakarta Sans',Arial,sans-serif;--sans:'Plus Jakarta Sans',Arial,sans-serif;--mono:'DM Mono',monospace}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f8fc;color:#172d55;font-family:'Plus Jakarta Sans',Arial,sans-serif;font-weight:500;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}button{font-family:inherit}img{max-width:100%}::selection{background:#24488f;color:#fff}
+@font-face{font-family:'Manrope';src:url('./assets/fonts/Manrope-Variable.ttf') format('truetype');font-style:normal;font-weight:200 800;font-display:swap}
+@font-face{font-family:'DM Sans';src:url('./assets/fonts/DM-Sans-Variable.ttf') format('truetype');font-style:normal;font-weight:100 1000;font-display:swap}
+:root{--ink:#172d55;--paper:#f6f8fc;--orange:#bc7b27;--line:#dce3ee;--muted:#566782;--display:'Manrope',Arial,sans-serif;--serif:'Manrope',Arial,sans-serif;--sans:'DM Sans',Arial,sans-serif;--mono:'DM Mono',monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f8fc;color:#172d55;font-family:var(--sans);font-size:16px;font-weight:500;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}button,input,select{font-family:inherit}img{max-width:100%}::selection{background:#24488f;color:#fff}
 
 @layer base{
   h1,h2,h3,h4,h5,h6{ @apply font-jakarta font-bold tracking-tight; }
