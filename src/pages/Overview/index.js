@@ -1,5 +1,6 @@
 import { galleryFolders, getFolderCover } from '../Gallery/galleryData';
 import PrincipalWelcome from '../../components/PrincipalWelcome';
+import HeritageShelf from './HeritageShelf';
 
 export default function OverviewPage({ go }) {
   return (
@@ -25,40 +26,8 @@ export default function OverviewPage({ go }) {
 
       <section className="ticker"><span>ONCE A SANTHOMITE</span><b>✳</b><span>ALWAYS A SANTHOMITE</span><b>✳</b><span>ONCE A SANTHOMITE</span><b>✳</b></section>
 
-      <section className="story-section motion-reveal" id="school-story">
-        <div className="section-kicker">01 / A LEGACY SINCE 1821</div>
-        <div className="story-grid">
-          <div>
-            <p className="story-overline">143, Santhome High Road<br/>Mylapore, Chennai - 600004</p>
-            <h2 className="type-section">A school that<br/><em>stays with you.</em></h2>
-          </div>
-          <div className="story-text">
-            <p className="lead">For over two centuries, from the shores of Mylapore, next to the iconic Santhome Basilica built over the tomb of St. Thomas the Apostle, stands an institution that has shaped the soul of Chennai.</p>
-            <p>Santhome Higher Secondary School was established in 1821 by Rev. Fr. Dom Drey Manuel De Ave Maria, the Episcopal Administrator of the old Diocese of Mylapore. One of the oldest educational establishments in the city, it was managed by the Diocesan clergy till 1954 and is today a proud Montfortian Institution, carrying forward the educational mission of St. Louis Marie de Montfort - education that enlightens the mind and ennobles the heart.</p>
-            <p>From Portuguese, Dutch and Jewish principals in its early years to the Brothers of St. Gabriel today, the school has witnessed history, yet its core has never changed: Truth, Service, and Character.</p>
-            <p>This is not just a school. For many of us, it was our first cricket ground, our first stage, our first lesson in discipline, friendship, and life.</p>
-          </div>
-        </div>
-      </section>
+      <HeritageShelf />
 
-      <section className="purpose-section motion-reveal">
-        <div className="purpose-heading"><div className="section-kicker">02 / WHY THIS ALUMNI ASSOCIATION?</div><h2 className="type-section">The classrooms change.<br/><em>The bond remains.</em></h2></div>
-        <p className="purpose-intro">Years have passed. Classrooms have changed. The old benches may be gone. But the bond remains. We, the alumni of Santhome, spread across Chennai and across continents, have carried the Santhomite identity wherever we went - as engineers, doctors, teachers, entrepreneurs, artists, sportsmen, and public servants.</p>
-        <p className="purpose-intro">The Santhome Higher Secondary School Alumni Association was formed with a single, heartfelt purpose: to bring our scattered family back home. This digital home is built to reconnect, remember and honour, and give back and guide forward.</p>
-        <div className="purpose-cards">
-          <article><span>01 - RECONNECT THE SANTHOME FAMILY</span><h3>Find your people.</h3><p>Reconnect with your batchmates. Find your best friends, favourite teachers, and the juniors and seniors who were part of your journey. Share old photos, organize reunions, and never lose touch again.</p><b>↗</b></article>
-          <article><span>02 - REMEMBER &amp; HONOUR</span><h3>Keep the stories.</h3><p>Our teachers gave us more than marks; they gave us values. Remember our Gurus, honour retired staff, and archive the school history, cricketing glories, and cultural triumphs that made Santhome a name to reckon with in Mylapore and beyond.</p><b>↗</b></article>
-          <article><span>03 - GIVE BACK &amp; GUIDE FORWARD</span><h3>Open a door.</h3><p>What we received, we must return. Mentor present students, offer career guidance and scholarships, support school initiatives, and help today's Santhome students find even better opportunities.</p><b>↗</b></article>
-        </div>
-      </section>
-
-      <section className="vision-section motion-reveal">
-        <div className="vision-heading"><div className="section-kicker">03 / OUR VISION &amp; MISSION</div><h2 className="type-section">A lifelong bond.<br/><em>A shared purpose.</em></h2></div>
-        <div className="vision-content">
-          <div className="vision-statement"><span>OUR VISION</span><p>To create a vibrant, lifelong, global community of Santhomites who stay connected with each other and with their alma mater.</p></div>
-          <div className="mission-list"><span>OUR MISSION</span><ul><li>Maintain a strong, searchable database of all alumni.</li><li>Facilitate networking for professional and personal growth.</li><li>Institute welfare measures for alumni, teachers, and current students.</li><li>Celebrate alumni achievements and bring pride to our school.</li></ul></div>
-        </div>
-      </section>
 
       <section className="invitation-section motion-reveal">
         <div className="invitation-mark">S</div>
