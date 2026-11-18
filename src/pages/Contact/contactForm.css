@@ -1,0 +1,45 @@
+.contact-grid{align-items:start}
+.alumni-form{min-width:0;padding:0;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 50px rgba(23,45,85,.07);overflow:hidden}
+.alumni-form-heading{padding:30px 34px 25px;background:linear-gradient(120deg,#172d55 0%,#213c6c 72%,#9b672e 170%);color:#fff}
+.alumni-form-heading .section-kicker{color:#e9c17e;font-size:9px;letter-spacing:.13em}
+.alumni-form-heading h2{margin:12px 0 7px;font-family:var(--display);font-size:clamp(25px,3vw,34px);font-weight:800;letter-spacing:-.045em;line-height:1.15}
+.alumni-form-heading p{margin:0;color:rgba(255,255,255,.78);font-size:12px;line-height:1.6}
+.alumni-form-heading p span,.alumni-field i,.alumni-choice-group legend i,.alumni-declaration-check i{color:#b97727;font-style:normal;font-weight:800}
+.alumni-form-heading p span{color:#f2c66e}
+.alumni-form-section{padding:25px 34px 28px;border-bottom:1px solid #e8ecf2}
+.alumni-form-section-title{display:flex;align-items:center;gap:11px;margin-bottom:19px}
+.alumni-form-section-title>span{display:grid;width:28px;height:28px;place-items:center;border-radius:50%;background:#f7f0e5;color:#a16a27;font:700 10px var(--mono)}
+.alumni-form-section-title h3,.alumni-declaration h3{margin:0;color:var(--ink);font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:-.025em}
+.alumni-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 15px}
+.alumni-field{display:block;min-width:0;margin:0;color:#455774;font-size:12px;font-weight:700;line-height:1.5}
+.alumni-field-wide{grid-column:1/-1}
+.alumni-form .alumni-field input,.alumni-form .alumni-field select,.alumni-form .alumni-field textarea{display:block;width:100%;min-width:0;min-height:46px;margin-top:7px;padding:11px 12px;border:1px solid #d6deea;border-radius:6px;outline:none;background:#fbfcfe;color:var(--ink);font-size:14px;font-weight:500;line-height:1.4;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.alumni-form .alumni-field textarea{min-height:78px;resize:vertical}
+.alumni-form .alumni-field input::placeholder,.alumni-form .alumni-field textarea::placeholder{color:#9aa5b5;font-weight:400}
+.alumni-form .alumni-field input:focus,.alumni-form .alumni-field select:focus,.alumni-form .alumni-field textarea:focus{border-color:#bd7b27;background:#fff;box-shadow:0 0 0 3px rgba(189,123,39,.12)}
+.alumni-form .alumni-field select{appearance:none;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23566782' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;cursor:pointer}
+.alumni-choice-group{min-width:0;margin:0;padding:0;border:0}
+.alumni-choice-group legend{width:100%;margin:0 0 12px;padding:0;color:#455774;font-size:12px;font-weight:750;line-height:1.5}
+.alumni-choice-options{display:grid;gap:9px}
+.alumni-radio-options{grid-template-columns:repeat(3,minmax(0,1fr))}
+.alumni-interest-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+.alumni-choice{display:flex;min-width:0;min-height:44px;align-items:center;gap:9px;padding:9px 11px;border:1px solid #dce3ed;border-radius:6px;background:#fbfcfe;color:#445571;font-size:12px;font-weight:600;line-height:1.35;cursor:pointer;transition:border-color .2s ease,background .2s ease,box-shadow .2s ease}
+.alumni-choice:hover{border-color:#c99a58;background:#fffaf2}
+.alumni-choice input{width:17px;height:17px;flex:0 0 auto;margin:0;accent-color:#a66c26}
+.alumni-choice input:focus-visible{outline:3px solid rgba(189,123,39,.3);outline-offset:2px}
+.alumni-choice-group legend small{color:#7b8799;font-size:11px;font-weight:500}
+.alumni-areas-group{margin-top:22px}
+.alumni-other-support{margin-top:14px}
+.alumni-declaration{margin:24px 34px 0;padding:17px 18px 18px;border:1px solid #d9c195;border-radius:7px;background:#fffaf1}
+.alumni-declaration h3{font-size:14px}
+.alumni-declaration-check{display:flex;align-items:flex-start;gap:10px;margin-top:11px;color:#52627a;font-size:12px;font-style:italic;line-height:1.6;cursor:pointer}
+.alumni-declaration-check input{width:17px;height:17px;flex:0 0 auto;margin:2px 0 0;accent-color:#a66c26}
+.alumni-form .form-error{margin:20px 34px 0;border-radius:5px;font-size:13px}
+.alumni-form .submit-button{display:flex;min-height:48px;align-items:center;justify-content:space-between;gap:25px;margin:22px 34px 0;padding:14px 18px;border-radius:5px;font-size:13px;font-weight:750}
+.alumni-form .submit-button span{margin-left:auto}
+.alumni-form-footnote{display:block;margin:14px 34px 28px;color:#788499;font-size:11px;line-height:1.6}
+.alumni-form .form-success{padding:70px 24px}
+
+@media(max-width:900px){.alumni-form-heading{padding:27px 25px 23px}.alumni-form-section{padding:23px 25px 25px}.alumni-declaration{margin-right:25px;margin-left:25px}.alumni-form .form-error{margin-right:25px;margin-left:25px}.alumni-form .submit-button{margin-right:25px;margin-left:25px}.alumni-form-footnote{margin-right:25px;margin-left:25px}}
+@media(max-width:650px){.alumni-form{border-radius:9px}.alumni-form-heading{padding:24px 19px 21px}.alumni-form-heading h2{font-size:26px}.alumni-form-section{padding:21px 19px 23px}.alumni-form-section-title{margin-bottom:16px}.alumni-form-section-title h3{font-size:16px}.alumni-field-grid{grid-template-columns:minmax(0,1fr);gap:14px}.alumni-field-wide{grid-column:auto}.alumni-radio-options{grid-template-columns:1fr}.alumni-choice{min-height:46px;font-size:13px}.alumni-interest-options{grid-template-columns:1fr}.alumni-areas-group{margin-top:19px}.alumni-declaration{margin:20px 19px 0;padding:15px}.alumni-form .form-error{margin-right:19px;margin-left:19px}.alumni-form .submit-button{width:calc(100% - 38px);margin:20px 19px 0}.alumni-form-footnote{margin:12px 19px 22px;font-size:10px}.alumni-form .alumni-field input,.alumni-form .alumni-field select,.alumni-form .alumni-field textarea{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.alumni-form .alumni-field input,.alumni-form .alumni-field select,.alumni-form .alumni-field textarea,.alumni-choice{transition:none}}
