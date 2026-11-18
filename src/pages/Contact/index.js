@@ -91,12 +91,16 @@ export default function ContactPage() {
 
       <div className="contact-grid motion-reveal">
         <div className="contact-info">
-          <div className="section-kicker">THE FIRST STEP HOME</div>
-          <h2 className="type-section">Two minutes.<br/><em>A lifetime of connection.</em></h2>
-          <p>Share a few details so we can reconnect you with your batch, invite you to events and find ways to give back.</p>
-          <div className="contact-detail"><span>WRITE TO US</span><a href="mailto:shssaa.1821@gmail.com">shssaa.1821@gmail.com ↗</a></div>
-          <div className="contact-detail"><span>GIVE US A CALL</span><a href="tel:+919884485511">+91 98844 85511 ↗</a></div>
-          <div className="contact-detail"><span>COME SAY HELLO</span><p>143 Santhome High Road<br/>Mylapore, Chennai — 600004</p></div>
+          <div className="contact-intro-copy">
+            <div className="section-kicker">THE FIRST STEP HOME</div>
+            <h2 className="type-section">Two minutes.<br/><em>A lifetime of connection.</em></h2>
+            <p>Share a few details so we can reconnect you with your batch, invite you to events and find ways to give back.</p>
+          </div>
+          <div className="contact-details">
+            <div className="contact-detail"><span>WRITE TO US</span><a href="mailto:shssaa.1821@gmail.com">shssaa.1821@gmail.com ↗</a></div>
+            <div className="contact-detail"><span>GIVE US A CALL</span><a href="tel:+919884485511">+91 98844 85511 ↗</a></div>
+            <div className="contact-detail"><span>COME SAY HELLO</span><p>143 Santhome High Road<br/>Mylapore, Chennai — 600004</p></div>
+          </div>
         </div>
 
         <form className="register-form alumni-form" onSubmit={submitRegistration}>
