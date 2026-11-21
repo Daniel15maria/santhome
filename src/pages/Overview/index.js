@@ -5,7 +5,11 @@ import HeritageShelf from './HeritageShelf';
 export default function OverviewPage({ go }) {
   return (
     <main className="overview-page">
-      <section className="hero motion-reveal">
+      <section className="hero hero--video motion-reveal">
+        <video className="hero-background-video" autoPlay muted loop playsInline preload="metadata" aria-hidden="true" tabIndex="-1">
+          <source src={`${process.env.PUBLIC_URL}/videos/santhome-hero.mp4`} type="video/mp4" />
+        </video>
+        <div className="hero-video-shade" aria-hidden="true" />
         <div className="hero-copy">
           <p className="eyebrow"><span className="dot" /> WELCOME TO THE SANTHOME HIGHER SECONDARY SCHOOL ALUMNI ASSOCIATION</p>
           <h1 className="type-display">Welcome back<br/>to <em>Santhome.</em></h1>
@@ -16,11 +20,6 @@ export default function OverviewPage({ go }) {
             <button className="text-button" onClick={() => document.getElementById('school-story')?.scrollIntoView({ behavior: 'smooth' })}>Our story <span>↓</span></button>
           </div>
           <div className="hero-foot"><span>TRUTH · SERVICE · CHARACTER</span><span>CHENNAI, INDIA</span></div>
-        </div>
-        <div className="hero-image hero-image--community">
-          <img src={getFolderCover(galleryFolders[0])?.src} alt="Santhome alumni gathered together at a reunion" />
-          <div className="image-label"><span>OUR SANTHOME FAMILY</span><b>One school. A lifetime together.</b></div>
-          <div className="image-number">EST.<br/><strong>1821</strong></div>
         </div>
       </section>
 
