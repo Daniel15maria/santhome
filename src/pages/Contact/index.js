@@ -20,38 +20,17 @@ export default function ContactPage() {
   const [directoryOpen, setDirectoryOpen] = useState(false);
   const [directoryError, setDirectoryError] = useState('');
 
-  const loadAlumni = useCallback(() => new Promise((resolve, reject) => {
-    const callbackName = `santhomeAlumniCallback${Date.now()}${Math.floor(Math.random() * 1000)}`;
-    const script = document.createElement('script');
-    const timeout = window.setTimeout(() => {
-      cleanup();
-      reject(new Error('The alumni list is taking too long to load. Please try again.'));
-    }, 12000);
-
-    function cleanup() {
-      window.clearTimeout(timeout);
-      delete window[callbackName];
-      script.remove();
+  const loadAlumni = useCallback(async () => {
+    const response = await fetch(`${alumniDirectoryUrl}?refresh=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error('The alumni list could not be reached.');
+    const result = await response.json();
+    if (result?.status !== 'success' || !Array.isArray(result.data)) {
+      throw new Error(result?.message || 'The alumni list could not be loaded.');
     }
-
-    window[callbackName] = (result) => {
-      cleanup();
-      if (result?.status !== 'success' || !Array.isArray(result.data)) {
-        reject(new Error(result?.message || 'The alumni list could not be loaded.'));
-        return;
-      }
-      setAlumni(result.data);
-      setDirectoryError('');
-      resolve(result.data);
-    };
-
-    script.onerror = () => {
-      cleanup();
-      reject(new Error('The alumni list could not be reached.'));
-    };
-    script.src = `${alumniDirectoryUrl}?callback=${callbackName}`;
-    document.body.appendChild(script);
-  }), []);
+    setAlumni(result.data);
+    setDirectoryError('');
+    return result.data;
+  }, []);
 
   useEffect(() => {
     loadAlumni().catch((loadError) => setDirectoryError(loadError.message));
@@ -63,14 +42,19 @@ export default function ContactPage() {
       batchYear,
       publicConsent: 'yes',
     });
-    await fetch(alumniDirectoryUrl, {
+    const response = await fetch(alumniDirectoryUrl, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
       body: payload.toString(),
     });
-    await new Promise((resolve) => window.setTimeout(resolve, 900));
-    await loadAlumni();
+    if (!response.ok) throw new Error('The registration was emailed, but the alumni list could not be updated.');
+    const result = await response.json();
+    if (result?.status !== 'success') {
+      throw new Error(result?.message || 'The registration was emailed, but the alumni list could not be updated.');
+    }
+    const updatedAlumni = await loadAlumni();
+    const wasAdded = updatedAlumni.some((person) => person.name === name && person.batchYear === batchYear);
+    if (!wasAdded) throw new Error('The registration was emailed, but it has not appeared in the public list yet.');
   }
 
   async function submitRegistration(event) {
