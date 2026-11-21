@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import './contactForm.css';
-
-const alumniDirectoryUrl = 'https://script.google.com/macros/s/AKfycbwE0yA8Mhx4cA_64WIjYCsIXMyPlC8FEY98BleUQ94oLjxnhZXHN0zVHSqufG3ymOd_/exec';
+import AlumniDirectory from '../../components/AlumniDirectory';
+import { addAlumnusToDirectory } from '../../services/alumniDirectory';
 
 const currentYear = new Date().getFullYear();
 const passingYears = Array.from({ length: currentYear - 1950 + 1 }, (_, index) => currentYear - index);
@@ -16,51 +16,13 @@ const interestOptions = [
 export default function ContactPage() {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
-  const [alumni, setAlumni] = useState([]);
-  const [directoryOpen, setDirectoryOpen] = useState(false);
   const [directoryError, setDirectoryError] = useState('');
-
-  const loadAlumni = useCallback(async () => {
-    const response = await fetch(`${alumniDirectoryUrl}?refresh=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) throw new Error('The alumni list could not be reached.');
-    const result = await response.json();
-    if (result?.status !== 'success' || !Array.isArray(result.data)) {
-      throw new Error(result?.message || 'The alumni list could not be loaded.');
-    }
-    setAlumni(result.data);
-    setDirectoryError('');
-    return result.data;
-  }, []);
-
-  useEffect(() => {
-    loadAlumni().catch((loadError) => setDirectoryError(loadError.message));
-  }, [loadAlumni]);
-
-  async function addAlumnusToDirectory(name, batchYear) {
-    const payload = new URLSearchParams({
-      name,
-      batchYear,
-      publicConsent: 'yes',
-    });
-    const response = await fetch(alumniDirectoryUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-      body: payload.toString(),
-    });
-    if (!response.ok) throw new Error('The registration was emailed, but the alumni list could not be updated.');
-    const result = await response.json();
-    if (result?.status !== 'success') {
-      throw new Error(result?.message || 'The registration was emailed, but the alumni list could not be updated.');
-    }
-    const updatedAlumni = await loadAlumni();
-    const wasAdded = updatedAlumni.some((person) => person.name === name && person.batchYear === batchYear);
-    if (!wasAdded) throw new Error('The registration was emailed, but it has not appeared in the public list yet.');
-  }
 
   async function submitRegistration(event) {
     event.preventDefault();
     setStatus('submitting');
     setError('');
+    setDirectoryError('');
 
     const form = new FormData(event.currentTarget);
     const name = form.get('name')?.toString().trim() || '';
@@ -121,6 +83,7 @@ export default function ContactPage() {
       if (publicConsent) {
         try {
           await addAlumnusToDirectory(name, batchYear);
+          window.dispatchEvent(new Event('santhome:alumni-updated'));
         } catch (directoryRequestError) {
           setDirectoryError(`Your email registration was sent, but we could not update the public list: ${directoryRequestError.message}`);
         }
@@ -229,33 +192,8 @@ export default function ContactPage() {
             </>
           )}
         </form>
-        <section className="alumni-directory" aria-labelledby="alumni-directory-heading">
-          <div className="alumni-directory-heading">
-            <div>
-              <div className="section-kicker">SANTHOMITES, RECONNECTED</div>
-              <h2 id="alumni-directory-heading">Know your friends who joined</h2>
-              <p>{alumni.length} {alumni.length === 1 ? 'alumnus' : 'alumni'} in the public list</p>
-            </div>
-            <button className="button-dark alumni-directory-toggle" type="button" aria-expanded={directoryOpen} onClick={() => setDirectoryOpen((open) => !open)}>
-              {directoryOpen ? 'Hide alumni' : 'View alumni'} <span aria-hidden="true">{directoryOpen ? '−' : '+'}</span>
-            </button>
-          </div>
-          {directoryOpen && (
-            <div className="alumni-directory-content">
-              {directoryError ? <p className="alumni-directory-message" role="status">{directoryError}</p> : alumni.length === 0 ? (
-                <p className="alumni-directory-message">No alumni have opted into the public list yet. Be the first to join.</p>
-              ) : (
-                <div className="alumni-directory-table-wrap">
-                  <table className="alumni-directory-table">
-                    <thead><tr><th scope="col">Name</th><th scope="col">Batch / year</th></tr></thead>
-                    <tbody>{alumni.map((person, index) => <tr key={`${person.name}-${person.batchYear}-${index}`}><td>{person.name}</td><td>{person.batchYear || '—'}</td></tr>)}</tbody>
-                  </table>
-                </div>
-              )}
-              <button className="alumni-directory-refresh" type="button" onClick={() => loadAlumni().catch((loadError) => setDirectoryError(loadError.message))}>Refresh list</button>
-            </div>
-          )}
-        </section>
+        <AlumniDirectory />
+        {directoryError && <p className="form-error" role="alert">{directoryError}</p>}
       </div>
     </main>
   );

@@ -16,16 +16,17 @@ function App() {
   usePageAnimations(page, rootRef);
 
   return <div ref={rootRef} className="site-shell font-dm min-h-screen w-full mx-auto max-w-screen-2xl">
+    <a className="skip-link" href="#main-content">Skip to content</a>
     <div className="topline"><span>143 Santhome High Road · Mylapore, Chennai</span><span>A legacy since 1821 <a className="official-link" href="https://santhomemylapore.in/" target="_blank" rel="noreferrer">School website ↗</a><i>✳</i></span></div>
     <header className="header relative z-20 bg-paper/95 backdrop-blur-sm">
       <button className="brand" onClick={() => go('Our story')} aria-label="Santhome Alumni home"><span className="crest">S</span><span className="brand-name">SANTHOME<span>ALUMNI ASSOCIATION</span></span></button>
-      <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? 'Close −' : 'Menu +'}</button>
-      <nav className={menuOpen ? 'nav open' : 'nav'}>{navItems.map((item, i) => <button key={item} className={page === item ? 'nav-link active' : 'nav-link'} onClick={() => go(item)}><span>0{i + 1}</span>{item}</button>)}<button className="join-button" onClick={() => go('Contact')}>Join the family <b>↗</b></button></nav>
+      <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded={menuOpen}>{menuOpen ? 'Close −' : 'Menu +'}</button>
+      <nav id="primary-nav" aria-label="Main navigation" className={menuOpen ? 'nav open' : 'nav'}>{navItems.map((item, i) => <button key={item} className={page === item ? 'nav-link active' : 'nav-link'} aria-current={page === item ? 'page' : undefined} onClick={() => go(item)}><span>0{i + 1}</span>{item}</button>)}<button className="join-button" onClick={() => go('Contact')}>Join the family <b>↗</b></button></nav>
     </header>
 
-    <div key={page} className="page-transition">
+    <div key={page} id="main-content" className="page-transition">
       {page === 'Our story' && <OverviewPage go={go} />}
-      {page === 'Events' && <EventsPage />}
+      {page === 'Events' && <EventsPage go={go} />}
       {page === 'Gallery' && <GalleryPage go={go} />}
       {page === 'Contact' && <ContactPage />}
     </div>
